@@ -1,0 +1,16 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GeometricShapesApp.ViewModels"
+        x:Class="GeometricShapesApp.Views.AddPointWindow"
+        x:DataType="vm:AddPointViewModel"
+        Title="Добавить точку">
+    <StackPanel Margin="10" Spacing="10">
+        <TextBlock Text="X:"/>
+        <TextBox Text="{Binding X}"/>
+        <TextBlock Text="Y:"/>
+        <TextBox Text="{Binding Y}"/>
+        <TextBlock Text="Название:"/>
+        <TextBox Text="{Binding Name}"/>
+        <Button Content="Добавить" Command="{Binding AddPointCommand}"/>
+    </StackPanel>
+</Window>

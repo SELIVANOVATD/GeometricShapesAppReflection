@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ShapeReflectionApp.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
+        x:Class="ShapeReflectionApp.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Shape Reflection App">
+        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Левая панель - управление -->
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="0">
+            <StackPanel Spacing="10">
+                <!-- Путь к библиотеке -->
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Путь к сборке:"/>
+                    <TextBox Text="{Binding AssemblyPath}" Watermark="Путь к DLL" IsReadOnly="True"/>
+                    <Button Content="Выбрать сборку..." Command="{Binding SelectAssemblyFileCommand}"/>
+                    <Button Content="Загрузить сборку" Command="{Binding LoadAssemblyCommand}"/>
+                </StackPanel>
+                
+                <!-- Доступные классы -->
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Доступные классы:"/>
+                    <ListBox ItemsSource="{Binding AvailableClasses}" SelectedItem="{Binding SelectedClass}" Height="150"/>
+                    <Button Content="Выбрать класс" Command="{Binding SelectClassCommand}"/>
+                </StackPanel>
+                
+                <!-- Доступные методы -->
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Доступные методы:"/>
+                    <ListBox ItemsSource="{Binding AvailableMethods}" SelectedItem="{Binding SelectedMethod}" Height="150">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Button Content="Выбрать метод" Command="{Binding SelectMethodCommand}"/>
+                </StackPanel>
+                
+                <!-- Параметры метода -->
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Параметры метода:" FontWeight="Bold"/>
+                    <ItemsControl ItemsSource="{Binding MethodParameters}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding Name}" Width="100" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding TypeName}" Width="100" VerticalAlignment="Center"/>
+                                    <TextBox Text="{Binding Value}" Width="150" VerticalAlignment="Center"
+                                             IsEnabled="{Binding !IsReadOnly}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                    <StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Stretch">
+    <Button Content="Выполнить" Command="{Binding ExecuteMethodCommand}" Width="80"/>
+    <Button Content="Свойства" Command="{Binding ShowShapePropertiesCommand}" Width="80"/>
+    <Button Content="Обновить" Command="{Binding UpdateShapePropertiesCommand}" Width="80"/>
+</StackPanel>
+<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,5,0,0" HorizontalAlignment="Stretch">
+    <Button Content="Отрисовать" Command="{Binding DrawShapeCommand}" Width="80"/>
+    <Button Content="Очистить" Command="{Binding ClearCanvasCommand}" Width="80"/>
+</StackPanel>
+                    
+                    <TextBlock Text="Результат:" FontWeight="Bold"/>
+                    <TextBox Text="{Binding MethodResult}" IsReadOnly="True" TextWrapping="Wrap" Height="100"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <!-- Правая панель - визуализация -->
+        <ScrollViewer Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Canvas Name="DrawingCanvas" Width="1000" Height="1000" Background="White">
+                <!-- Фигуры будут добавляться здесь -->
+            </Canvas>
+        </ScrollViewer>
+    </Grid>
+</Window>

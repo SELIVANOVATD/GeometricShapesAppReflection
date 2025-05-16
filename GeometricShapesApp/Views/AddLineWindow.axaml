@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GeometricShapesApp.ViewModels"
+        x:Class="GeometricShapesApp.Views.AddLineWindow"
+        x:DataType="vm:AddLineViewModel"
+        Title="Добавить линию">
+    <StackPanel Margin="10" Spacing="10">
+        <TextBlock Text="X1:"/>
+        <TextBox Text="{Binding X1}"/>
+        <TextBlock Text="Y1:"/>
+        <TextBox Text="{Binding Y1}"/>
+        <TextBlock Text="X2:"/>
+        <TextBox Text="{Binding X2}"/>
+        <TextBlock Text="Y2:"/>
+        <TextBox Text="{Binding Y2}"/>
+        <TextBlock Text="Название:"/>
+        <TextBox Text="{Binding Name}"/>
+        <Button Content="Добавить" Command="{Binding AddLineCommand}"/>
+    </StackPanel>
+</Window>

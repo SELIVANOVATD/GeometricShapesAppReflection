@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:GeometricShapesApp.ViewModels"
+        x:Class="GeometricShapesApp.Views.AddEllipseWindow"
+        x:DataType="vm:AddEllipseViewModel"
+        Title="Добавить эллипс">
+    <StackPanel Margin="10" Spacing="10">
+        <TextBlock Text="Центр X:"/>
+        <TextBox Text="{Binding CenterX}"/>
+        <TextBlock Text="Центр Y:"/>
+        <TextBox Text="{Binding CenterY}"/>
+        <TextBlock Text="Радиус X:"/>
+        <TextBox Text="{Binding RadiusX}"/>
+        <TextBlock Text="Радиус Y:"/>
+        <TextBox Text="{Binding RadiusY}"/>
+        <TextBlock Text="Название:"/>
+        <TextBox Text="{Binding Name}"/>
+        <Button Content="Добавить" Command="{Binding AddEllipseCommand}"/>
+    </StackPanel>
+</Window>
